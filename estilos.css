@@ -1,1 +1,136 @@
+/* --- Variables de Color y Estilos Globales --- */
+:root {
+    --color-fondo: #fdf6fa; /* Rosado muy pálido */
+    --color-ramo-default: #f3e5f5; /* Morado pastel claro */
+    --color-ramo-borde: #d1c4e9; /* Morado pastel medio */
+    --color-ramo-hover: #e1bee7; /* Morado pastel más oscuro para hover */
+    --color-ramo-aprobado: #e8f5e9; /* Verde pastel suave */
+    --color-ramo-aprobado-borde: #c8e6c9; /* Verde pastel medio */
+    --color-ramo-bloqueado: #f5f5f5; /* Gris muy claro */
+    --color-ramo-bloqueado-borde: #e0e0e0; /* Gris claro */
+    --color-texto-principal: #311b92; /* Morado oscuro para texto */
+    --color-texto-secundario: #6a1b9a; /* Morado medio para texto */
+    --fuente-principal: 'Poppins', sans-serif;
+}
 
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: var(--fuente-principal);
+    background-color: var(--color-fondo);
+    color: var(--color-texto-principal);
+    line-height: 1.6;
+}
+
+/* --- Encabezado y Pie de Página --- */
+header, footer {
+    text-align: center;
+    padding: 1.5rem 1rem;
+    color: var(--color-texto-secundario);
+}
+
+header h1 {
+    color: var(--color-texto-principal);
+    margin-bottom: 0.5rem;
+}
+
+/* --- Contenedor Principal de la Malla --- */
+#malla-curricular-container {
+    display: flex;
+    overflow-x: auto; /* Permite scroll horizontal en pantallas pequeñas */
+    padding: 1rem;
+    padding-bottom: 2rem;
+    scroll-snap-type: x mandatory; /* Ajusta el scroll a cada columna */
+}
+
+/* --- Columnas de Semestres --- */
+.semestre-columna {
+    flex: 0 0 220px; /* Ancho fijo para las columnas */
+    margin: 0 10px;
+    padding: 1rem;
+    background-color: rgba(255, 255, 255, 0.6);
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    scroll-snap-align: start; /* Para el efecto de scroll */
+}
+
+.semestre-titulo {
+    text-align: center;
+    font-weight: 600;
+    color: var(--color-texto-principal);
+    margin-bottom: 1rem;
+    border-bottom: 2px solid var(--color-ramo-borde);
+    padding-bottom: 0.5rem;
+}
+
+/* --- Tarjetas de Ramos --- */
+.ramo {
+    background-color: var(--color-ramo-default);
+    border: 1px solid var(--color-ramo-borde);
+    padding: 12px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    user-select: none; /* Evita seleccionar el texto al hacer clic */
+}
+
+.ramo:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 12px rgba(118, 43, 137, 0.15);
+    background-color: var(--color-ramo-hover);
+}
+
+/* --- Estados de los Ramos --- */
+.ramo.aprobado {
+    background-color: var(--color-ramo-aprobado);
+    border-color: var(--color-ramo-aprobado-borde);
+    color: #388e3c; /* Verde oscuro para el texto */
+    text-decoration: line-through;
+    opacity: 0.8;
+}
+
+.ramo.bloqueado {
+    background-color: var(--color-ramo-bloqueado);
+    border-color: var(--color-ramo-bloqueado-borde);
+    color: #9e9e9e; /* Color de texto gris */
+    cursor: not-allowed;
+    opacity: 0.9;
+}
+
+.ramo.bloqueado:hover {
+    transform: none; /* Sin efecto hover si está bloqueado */
+    box-shadow: none;
+}
+
+/* --- Diseño Responsivo --- */
+@media (max-width: 768px) {
+    body {
+        font-size: 14px;
+    }
+
+    #malla-curricular-container {
+        /* En móvil, el scroll horizontal es la mejor opción para 10 semestres */
+        padding: 0.5rem;
+    }
+
+    .semestre-columna {
+        flex: 0 0 180px; /* Columnas un poco más angostas en móvil */
+        margin: 0 5px;
+    }
+    
+    .ramo {
+        padding: 10px;
+        font-size: 0.8rem;
+    }
+
+    header h1 {
+        font-size: 1.5rem;
+    }
+}
